@@ -28,7 +28,6 @@ public class Prob3 {
 
 			System.out.println("결과 값 : " + sum);
 
-			scanner.nextLine(); // 버퍼비우기
 		}
 
 		scanner.close();

@@ -8,12 +8,6 @@ class Goods {
 	private int price;
 	private int countStock;
 
-	Goods() {
-		name = new String();
-		price = 0;
-		countStock = 0;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -46,60 +40,55 @@ public class GoodsApp {
 	public static void main(String[] args) {
 
 		Goods[] goods = new Goods[COUNT_GOODS];
-		
-		goodsInput(goods);//상품 입력
+
+		for (int i = 0; i < COUNT_GOODS; i++) {
+			goods[i] = new Goods();
+		}
+
+		goodsInput(goods);// 상품 입력
 		goodsPrint(goods);// 상품 출력
-		
+
 	}
 
 	public static void goodsInput(Goods[] goods) {
 		
 		Scanner scanner = new Scanner(System.in);
 		
-		String name;
-		int price;
-		int countStock;
+		String str;
 
-		System.out.println("실행결과 : ");
+		System.out.println("실행결과");
 		
 		for (int i = 0; i < COUNT_GOODS; i++) {
-
-			System.out.print("상품명 : ");
-			name = scanner.nextLine();
 			
-			goods[i].setName(name);
-
-			scanner.nextLine(); // 버퍼비우기
-
-			System.out.println();
-
-			System.out.print("가격 : ");
-			price = scanner.nextInt();
-			goods[i].setPrice(price);
-
-			System.out.println();
-
-			System.out.print("입고 수 : ");
-			countStock = scanner.nextInt();
-			goods[i].setCountStock(countStock);
-
-			System.out.println();
+			str = scanner.nextLine();
+			String[] tokens = str.split(" ");
+			
+			if( tokens.length != 3 ) {
+				System.out.println( ">> 잘못된 입력");
+				i--;
+				continue;
+			}
+			
+			goods[i].setName(tokens[0]);
+			goods[i].setPrice(Integer.parseInt(tokens[1]));
+			goods[i].setCountStock(Integer.parseInt(tokens[2]));
 
 		}
 		
 		scanner.close();
 
 	}
-	
+
 	public static void goodsPrint(Goods[] goods) {
 		for (int i = 0; i < COUNT_GOODS; i++) {
-			System.out.println(goods[i].getName()+" "+goods[i].getPrice()+" "+goods[i].getCountStock());
+			System.out.println(goods[i].getName() + " " + goods[i].getPrice() + " " + goods[i].getCountStock());
 		}
-		
+
 		for (int i = 0; i < COUNT_GOODS; i++) {
-			System.out.println(goods[i].getName()+"(가격:"+goods[i].getPrice()+"원)이 "+goods[i].getCountStock()+"개 입고 되었습니다.");
+			System.out.println(goods[i].getName() + "(가격:" + goods[i].getPrice() + "원)이 " + goods[i].getCountStock()
+					+ "개 입고 되었습니다.");
 		}
-		
+
 	}
 
 }
