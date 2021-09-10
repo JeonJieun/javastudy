@@ -14,4 +14,6 @@ public class MusicPhone extends Phone {
 	private void playMusic() {
 		System.out.print("MP3 플레이어에서 음악재생");
 	}
+	
+
 }
