@@ -1,19 +1,23 @@
 package prob03;
 
-public class Marine{
-	// 현재 위치
-	private int x;
-	private int y;
-
-	void move(int x, int y) {
-		/* 지정된 위치로 이동 */
-	}
-
-	void stop() {
-		/* 현재 위치에 정지 */
+public class Marine extends Unit{
+	
+	private boolean stimPackState; // true : 스팀팩 사용, false : 스팀팩 사용 안함;
+	
+	Marine(){ 
+		setStimPackState(false);
 	}
 	
+	public boolean isStimPackState() {
+		return stimPackState;
+	}
+
+	public void setStimPackState(boolean stimPackState) {
+		this.stimPackState = stimPackState;
+	}
+
 	void stimPack() { 
-		/* 스팀팩을 사용한다.*/
+		if(isStimPackState()) { System.out.println("스팀팩 사용."); }
+		else { System.out.println("스팀팩 사용 안함."); }
 	}	
 }

@@ -7,7 +7,7 @@ public class Mul extends Calc{
 //		this.a = a;
 //		this.b = b;
 //	}
-	
+	@Override
 	public int calculate() {
 		return getA() * getB();
 	}
