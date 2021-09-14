@@ -1,19 +1,38 @@
 package prob01;
 
 public class Printer {
-	void println(int data) {
-		System.out.println(data);
+//	public void println(int i) {
+//		System.out.println(i);
+//	}
+//	
+//	public void println(boolean b) {
+//		System.out.println(b);
+//	}
+//
+//	public void println(double d) {
+//		System.out.println(d);
+//	}
+//
+//	public void println(String s) {
+//		System.out.println(s);
+//	}
+	
+	public <T> void println(T t) {
+		System.out.println(t);
 	}
-
-	void println(boolean data) {
-		System.out.println(data);
+	
+	public int sum(Integer... nums) {
+		int sum = 0;
+		for(Integer i : nums) {
+			sum += i;
+		}		
+		return sum;
 	}
-
-	void println(double data) {
-		System.out.println(data);
+	
+	public <T> void println(T... ts) {
+		for(T t : ts) {
+			System.out.println(t);
+		}
 	}
-
-	void println(String data) {
-		System.out.println(data); 
-	}
+	
 }
