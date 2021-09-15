@@ -12,31 +12,30 @@ public class FileReaderTest {
 	public static void main(String[] args) {
 		Reader in = null;
 		InputStream is = null;
-		
+
 		try {
-			in = new FileReader("1234.txt"); //3바이트씩 읽음 txt는 21바이트
-			
+			in = new FileReader("1234.txt"); // 3바이트씩 읽음 txt는 21바이트
+
 			int count = 0;
 			int data = -1;
 			while ((data = in.read()) != -1) {
-				System.out.print((char)data);
+				System.out.print((char) data);
 				count++;
 			}
 			System.out.println("");
-			System.out.println("count:"+count);
+			System.out.println("count:" + count);
 			System.out.println("=================================================");
-			
+
 			count = 0;
 			data = -1;
 			is = new FileInputStream("1234.txt");
-			while((data=is.read())!= -1) {
-				System.out.print((char)data);
+			while ((data = is.read()) != -1) {
+				System.out.print((char) data);
 				count++;
 			}
 			System.out.println("");
-			System.out.println("count:"+count);
-		
-			
+			System.out.println("count:" + count);
+
 		} catch (FileNotFoundException e) {
 			System.out.println("File Not Fount:" + e);
 		} catch (IOException e) {

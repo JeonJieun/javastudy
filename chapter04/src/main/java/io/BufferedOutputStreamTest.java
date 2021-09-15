@@ -17,7 +17,7 @@ public class BufferedOutputStreamTest {
 			bos = new BufferedOutputStream(fos);
 
 			// for(int i = 'a'; i<'z'; i++)
-			for (int i = 97; i < 122; i++) {
+			for (int i = 97; i < 123; i++) {
 				bos.write(i);
 			}
 
