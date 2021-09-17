@@ -16,17 +16,25 @@ public class ChatClientReceiveThread extends Thread {
 		this.flag = flag;
 	}
 
+	public boolean isFlag() {
+		return flag;
+	}
+
 	@Override
 	public void run() {
 
-		while (!flag) {
+		while (!isFlag()) {
 			try {
 				data = bufferedReader.readLine();
 			} catch (IOException e) {
-
+				setFlag(true);
 			}
 
-			System.out.println(data);
+			if (!isFlag()) {
+				System.out.println(data);
+			}
 		}
+
+		return;
 	}
 }

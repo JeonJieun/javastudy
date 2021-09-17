@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class ChatClient {
 	private static final String SERVER_IP = "127.0.0.1";
 	private static final int SERVER_PORT = 6000;
+	private static ChatClientReceiveThread thread;
 
 	public static void main(String[] args) {
 		Socket socket = null;
@@ -32,29 +33,36 @@ public class ChatClient {
 			String nickname = scanner.nextLine();
 			printWriter.println("join:" + nickname);
 
-			ChatClientReceiveThread thread = new ChatClientReceiveThread(bufferedReader);
+			thread = new ChatClientReceiveThread(bufferedReader);
 			thread.start();
+			
+			String input;
 
 			while (true) {
-				String input = scanner.nextLine();
+				input = scanner.nextLine();
 
 				if ("quit".equals(input)) {
+					printWriter.println(input);
 				    thread.setFlag(true);
 					break;
 				}
-
-				else {
+				
+				else{
 					printWriter.println("message:" + input);
 				}
 
 			}
+			
+			return;
 
 		} catch (SocketException e) {
 			log("갑자기 서버로 부터 연결 끊김");
 		} catch (IOException e) {
 			log("error:" + e);
 		} finally {
-			try {
+			thread.setFlag(true);
+			try {	
+				
 				if (scanner != null) {
 					scanner.close();
 				}

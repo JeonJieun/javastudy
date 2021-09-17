@@ -16,6 +16,15 @@ public class ChatServerThread extends Thread {
 	private List<Writer> listWriters;
 	private BufferedReader bufferedReader;
 	private PrintWriter printWriter;
+	private boolean flag = false;
+
+	public boolean isFlag() {
+		return flag;
+	}
+
+	public void setFlag(boolean flag) {
+		this.flag = flag;
+	}
 
 	public ChatServerThread(Socket socket, List<Writer> listWriters) {
 		this.socket = socket;
@@ -33,7 +42,7 @@ public class ChatServerThread extends Thread {
 			bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 			printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
 
-			while (true) {
+			while (!isFlag()) {
 				String request = bufferedReader.readLine();
 				if (request == null) {
 					ChatServer.log("클라이언트로 부터 연결 끊김");
@@ -52,8 +61,8 @@ public class ChatServerThread extends Thread {
 					doMessage(tokens[1]);
 
 				} else if ("quit".equals(tokens[0])) {
-
 					doQuit(printWriter);
+					setFlag(true);
 
 				} else {
 
@@ -61,14 +70,20 @@ public class ChatServerThread extends Thread {
 				}
 
 			}
+			
+			return ;
 
 		} catch (IOException e) {
 			ChatServer.log("error:" + e);
 		} finally {
+			setFlag(true);
 			try {
 				if (socket != null && socket.isClosed() == false) {
 					socket.close();
 				}
+				
+				
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -100,9 +115,9 @@ public class ChatServerThread extends Thread {
 		synchronized (listWriters) {
 
 			for (Writer writer : listWriters) {
-				PrintWriter printWriter = (PrintWriter) writer;
-				printWriter.println(data);
-				// printWriter.flush();
+				PrintWriter pw = (PrintWriter) writer;
+				pw.println(data);
+				pw.flush();
 			}
 
 		}

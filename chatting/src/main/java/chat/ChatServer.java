@@ -12,6 +12,7 @@ import java.util.List;
 public class ChatServer {
 
 private static final int PORT = 6000;
+private static ChatServerThread thread;
 	
 	public static void main(String[] args) {
 		
@@ -32,16 +33,20 @@ private static final int PORT = 6000;
 			while(true) {
 				
 				Socket socket = serverSocket.accept();
-				new ChatServerThread(socket, listWriters).start();
+				thread = new ChatServerThread(socket, listWriters);
+				thread.start();
 			}
 
 		} catch(IOException e) {
 			log("error: " + e);
 		} finally {
+			thread.setFlag(true);
 			try {
 				if(serverSocket != null && serverSocket.isClosed() == false) {
 					serverSocket.close();
+					
 				}
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
