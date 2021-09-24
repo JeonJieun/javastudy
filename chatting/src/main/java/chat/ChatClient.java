@@ -35,7 +35,7 @@ public class ChatClient {
 
 			thread = new ChatClientReceiveThread(bufferedReader);
 			thread.start();
-			
+
 			String input;
 
 			while (true) {
@@ -43,16 +43,16 @@ public class ChatClient {
 
 				if ("quit".equals(input)) {
 					printWriter.println(input);
-				    thread.setFlag(true);
+					thread.setFlag(true);
 					break;
 				}
-				
-				else{
+
+				else {
 					printWriter.println("message:" + input);
 				}
 
 			}
-			
+
 			return;
 
 		} catch (SocketException e) {
@@ -61,8 +61,8 @@ public class ChatClient {
 			log("error:" + e);
 		} finally {
 			thread.setFlag(true);
-			try {	
-				
+			try {
+
 				if (scanner != null) {
 					scanner.close();
 				}

@@ -1,4 +1,4 @@
-package chat;
+package chat.gui;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -39,17 +39,6 @@ private static ChatServerThread thread;
 
 		} catch(IOException e) {
 			log("error: " + e);
-		} finally {
-			thread.setFlag(true);
-			try {
-				if(serverSocket != null && serverSocket.isClosed() == false) {
-					serverSocket.close();
-					
-				}
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 	
