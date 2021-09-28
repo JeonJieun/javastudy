@@ -33,8 +33,8 @@
   	<module>chapter03</module>
   	<module>practice05</module>
   	<module>chapter04</module>
-  	<module>finaltest</module>
+  	<module>FinalTest</module>
   	<module>network</module>
-  	<module>chat</module>
+  	<module>chatting</module>
   </modules>
 </project>
